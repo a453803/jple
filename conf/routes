@@ -3,7 +3,9 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
+GET     /                           controllers.Application.index(adjective = "magnificent", animal = "donkey")
+GET     /:animal                    controllers.Application.index(adjective = "magnificent", animal: String)
+GET     /:adjective/:animal         controllers.Application.index(adjective: String, animal: String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
