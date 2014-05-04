@@ -3,9 +3,10 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index(adjective = "magnificent", animal = "donkey")
-GET     /:animal                    controllers.Application.index(adjective = "magnificent", animal: String)
-GET     /:adjective/:animal         controllers.Application.index(adjective: String, animal: String)
+GET     /                           controllers.Application.index(adjective = "magnificent", noun = "donkey")
+GET     /:noun                      controllers.Application.index(adjective = "magnificent", noun: String)
+GET     /:adjective/:noun           controllers.Application.index(adjective: String, noun: String)
+POST    /                           controllers.Application.submitCorrection()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

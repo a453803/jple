@@ -1,7 +1,27 @@
-@(adjective: String)(animal: String)
+@(correctionForm: Form[Application.Correction])(adjective: String)(noun: String)
+
+@import helper._
 
 @main("Java Play Learning Environment!") {
 
-    We have identified you as a @adjective @animal!
+    <p>We have identified you as a @adjective @noun!</p>
 
+    <p>What's that you say? Well...we must have been confused. Please, describe yourself for us now...</p>
+
+    @form(action = routes.Application.submitCorrection, args = 'id -> "correctionForm") {
+
+        @inputText(
+            field = correctionForm("adjective")
+            , args = '_label -> "Adjective"
+        )
+
+        @inputText(
+            field = correctionForm("noun")
+            , args = '_label -> "Noun:"
+        )
+
+        <p class="buttons">
+            <input type="submit">
+        <p>
+    }
 }
