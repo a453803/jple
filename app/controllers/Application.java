@@ -1,5 +1,6 @@
 package controllers;
 
+import play.data.validation.Constraints.*;
 import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*;
@@ -13,8 +14,17 @@ public class Application extends Controller {
     }
 
     public static class Correction {
+        @Required
         public String adjective;
+        @Required
         public String noun;
+
+        public String validate() {
+            if(adjective.matches(".*\\d.*") || noun.matches(".*\\d.*")) {
+                return "Totes Not Valid! Numbers aren't things, and don't describe things!";
+            }
+            return null;
+        }
     }
 
     public static Result submitCorrection() {

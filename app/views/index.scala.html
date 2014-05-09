@@ -8,11 +8,15 @@
 
     <p>What's that you say? Well...we must have been confused. Please, describe yourself for us now...</p>
 
+    @if(correctionForm.hasGlobalErrors) {
+        <span class="errorSpan">@correctionForm.globalError.message</span>
+    }
+
     @form(action = routes.Application.submitCorrection, args = 'id -> "correctionForm") {
 
         @inputText(
             field = correctionForm("adjective")
-            , args = '_label -> "Adjective"
+            , args = '_label -> "Adjective:"
         )
 
         @inputText(
