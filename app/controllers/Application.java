@@ -5,17 +5,24 @@ import play.data.validation.Constraints.*;
 import play.mvc.*;
 import play.data.*;
 import static play.data.Form.*;
-
+import static play.libs.Json.toJson;
 import views.html.*;
-
 import java.util.List;
 
 public class Application extends Controller {
 
+    // standard index which provides an assertion about the visitor, and provides a form to correct the assertion
     public static Result index(String adjective, String noun) {
-        return ok(index.render(form(Correction.class), Visitor.find.all(),adjective, noun));
+        return ok(index.render(form(Correction.class), Visitor.find.all(), adjective, noun));
     }
 
+    // returns JSON string of all known visitors
+    public static Result provideVisitors() {
+        List<Visitor> visitors = Visitor.find.all();
+        return ok(toJson(visitors));
+    }
+
+    // a class which defines what a correction looks like, and validates it
     public static class Correction {
         @Required
         public String adjective;
@@ -30,6 +37,7 @@ public class Application extends Controller {
         }
     }
 
+    // called on post of /, handles correction form submit
     public static Result submitCorrection() {
         Form<Correction> form = form(Correction.class).bindFromRequest();
         if(form.hasErrors()){

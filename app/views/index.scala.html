@@ -33,7 +33,7 @@
         <h3>Visitors So Far:</h3>
         <ul>
             @for(visitorType <- visitorTypes) {
-            <li>@visitorType.getAdjective() @visitorType.getNoun() </li>
+            <li>@visitorType.adjective @visitorType.noun</li>
             }
         </ul>
     }
