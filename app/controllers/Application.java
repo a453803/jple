@@ -44,8 +44,8 @@ public class Application extends Controller {
             return badRequest(index.render(form,Visitor.find.all(),"magnificent","donkey"));
         } else {
             Correction data = form.get();
-            boolean itemExists = (Visitor.find.where().eq("adjective", data.adjective).eq("noun", data.adjective).findRowCount() == 1) ? true : false;
-            if(!itemExists) {
+            boolean itemExists = Visitor.find.where().eq("adjective", data.adjective).eq("noun", data.noun).findRowCount() == 0 ? false : true;
+            if(itemExists == false) {
                 Visitor.saveType(data.adjective,data.noun);
             }
             return ok(index.render(form(Correction.class),Visitor.find.all(),data.adjective,data.noun));
