@@ -4,20 +4,24 @@
 # --- !Ups
 
 create table visitor (
-  id                        integer auto_increment not null,
+  id                        integer not null,
   adjective                 varchar(255),
   noun                      varchar(255),
   constraint pk_visitor primary key (id))
 ;
+
+create sequence visitor_seq;
 
 
 
 
 # --- !Downs
 
-SET FOREIGN_KEY_CHECKS=0;
+SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table visitor;
+drop table if exists visitor;
 
-SET FOREIGN_KEY_CHECKS=1;
+SET REFERENTIAL_INTEGRITY TRUE;
+
+drop sequence if exists visitor_seq;
 
